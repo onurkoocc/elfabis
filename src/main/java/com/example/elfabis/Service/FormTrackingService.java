@@ -6,7 +6,7 @@ import java.text.Normalizer;
 import java.util.List;
 
 public interface FormTrackingService {
-    List<FormTracking> listAllFormTracking();
+    List<FormTracking> listAllFormTrackings();
 
     FormTracking getFormTrackingById(Integer formTrackingId);
 

@@ -1,24 +1,48 @@
 package com.example.elfabis.Controller;
 
 import com.example.elfabis.Entity.Academician;
+import com.example.elfabis.Payload.Request.UserInfoRequest;
+import com.example.elfabis.Repository.AcademicianRepository;
 import com.example.elfabis.Service.AcademicianService;
 import lombok.AllArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/academician")
+@RequestMapping("/academicians")
 @AllArgsConstructor
 public class AcademicianController {
     @Autowired
     AcademicianService academicianService;
 
-    @GetMapping("/users")
-    public List<Academician> listAllUsers() { return academicianService.listAllAcademician(); }
+    @Autowired
+    AcademicianRepository academicianRepository;
+
+    @GetMapping
+    public List<Academician> listAllUsers() { return academicianService.listAllAcademicians(); }
+
+    @PostMapping("/addacademician")
+    public ResponseEntity createAcademician(@RequestBody UserInfoRequest academician){
+        return ResponseEntity.ok(academicianService.createAcademician(academician));
+    }
+
+    @PutMapping("/updateacademician")
+    public ResponseEntity updateAcademician(@RequestBody UserInfoRequest academician){
+        return ResponseEntity.ok(academicianService.updateAcademician(academician));
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(academicianService.getAcademicianById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable("id") Integer id){
+        academicianService.deleteAcademician(id);
+        return ResponseEntity.ok("ok");
+    }
 }
