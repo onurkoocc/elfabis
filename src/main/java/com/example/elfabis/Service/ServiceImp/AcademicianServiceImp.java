@@ -23,7 +23,20 @@ public class AcademicianServiceImp implements AcademicianService {
     }
 
     @Override
-    public Academician getAcademicianById(Long id){
-        return academicianRepository.getById(id.intValue());
+    public Academician getAcademicianById(Integer id){
+        return academicianRepository.getById(id);
+    }
+
+    @Override
+    public Academician createAcademician(Academician academician){
+        return academicianRepository.save(academician);
+    }
+    @Override
+    public void deleteAcademician(Integer academicianId){
+        academicianRepository.deleteById(academicianId);
+    }
+    @Override
+    public Academician updateAcademician(Academician academician){
+        return academicianRepository.save(academician);
     }
 }
