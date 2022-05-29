@@ -27,12 +27,12 @@ public class CourseController {
     @GetMapping
     public List<Course> listAllUsers() { return courseService.listAllCourses(); }
 
-    @PostMapping("/addcourse")
+    @PostMapping
     public ResponseEntity createCourse(@RequestBody Course course){
         return ResponseEntity.ok(courseService.createCourse(course));
     }
 
-    @PutMapping("/updatecourse")
+    @PutMapping
     public ResponseEntity updateCourse(@RequestBody Course course){
         return ResponseEntity.ok(courseService.updateCourse(course));
     }
