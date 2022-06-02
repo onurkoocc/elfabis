@@ -27,5 +27,7 @@ public class Course {
     @JoinColumn(name = "plan_id")
     private Plan plan;
     private boolean equivalent;
-    private int equivalentCourseId;
+    @ManyToOne
+    @JoinColumn(name = "equivalent_course_id")
+    private EquivalentCourse equivalentCourse;
 }
