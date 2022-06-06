@@ -1,4 +1,4 @@
-package com.example.elfabis.Pojo;
+package com.example.elfabis.Entity;
 
 import com.example.elfabis.Entity.ERole;
 import lombok.AllArgsConstructor;

@@ -18,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/givencourses")
+@RequestMapping("/givenCourses")
 @AllArgsConstructor
 public class GivenCourseController {
     @Autowired
@@ -30,12 +30,12 @@ public class GivenCourseController {
     @GetMapping
     public List<GivenCourse> listAllUsers() { return givenCourseService.listAllGivenCourses(); }
 
-    @PostMapping("/addgivenCourse")
+    @PostMapping
     public ResponseEntity createGivenCourse(@RequestBody GivenCourse givenCourse){
         return ResponseEntity.ok(givenCourseService.createGivenCourse(givenCourse));
     }
 
-    @PutMapping("/updategivenCourse")
+    @PutMapping
     public ResponseEntity updateGivenCourse(@RequestBody GivenCourse givenCourse){
         return ResponseEntity.ok(givenCourseService.updateGivenCourse(givenCourse));
     }

@@ -48,6 +48,10 @@ public class AcademicianServiceImp implements AcademicianService {
         String strRole = academician.getRole();
         Role role = new Role();
 
+        userTmp.setAbbr(academician.getAbbr());
+        userTmp.setAbd(academician.getAbd());
+        userTmp.setTitle(academician.getTitle());
+
         if(strRole.equalsIgnoreCase("MUDEKMEMBER")){
             Role adminRole = roleRepository.findByName(ERole.MUDEKMEMBER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -76,6 +80,10 @@ public class AcademicianServiceImp implements AcademicianService {
         userTmp.setName(academician.getName());
         userTmp.setUsername(academician.getUsername());
         userTmp.setEmail(academician.getEmail());
+
+        userTmp.setAbbr(academician.getAbbr());
+        userTmp.setAbd(academician.getAbd());
+        userTmp.setTitle(academician.getTitle());
 
         String strRole = academician.getRole();
         Role role = new Role();

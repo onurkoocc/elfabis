@@ -1,6 +1,5 @@
 package com.example.elfabis.Entity;
 
-import com.example.elfabis.Pojo.Plan;
 import lombok.*;
 
 import javax.persistence.*;

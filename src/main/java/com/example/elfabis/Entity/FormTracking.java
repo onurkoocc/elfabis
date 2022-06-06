@@ -38,6 +38,4 @@ public class FormTracking {
     private boolean form2;
     private boolean form3;
     private boolean pc;
-
-
 }
