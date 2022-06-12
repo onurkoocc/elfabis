@@ -21,5 +21,5 @@ public class GivenCourse {
     private Academician lecturer;
     private int year;
     private int semester;
-    private int group;
+    private int courseGroup;
 }

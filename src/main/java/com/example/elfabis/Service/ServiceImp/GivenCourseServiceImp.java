@@ -1,7 +1,12 @@
 package com.example.elfabis.Service.ServiceImp;
 
 import com.example.elfabis.Entity.GivenCourse;
+import com.example.elfabis.Payload.Request.GivenCourseRequest;
+import com.example.elfabis.Repository.AcademicianRepository;
+import com.example.elfabis.Repository.CourseRepository;
 import com.example.elfabis.Repository.GivenCourseRepository;
+import com.example.elfabis.Service.AcademicianService;
+import com.example.elfabis.Service.CourseService;
 import com.example.elfabis.Service.GivenCourseService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,7 +18,9 @@ import java.util.List;
 @Log4j2
 @AllArgsConstructor
 public class GivenCourseServiceImp implements GivenCourseService {
-    GivenCourseRepository givenCourseRepository;
+    private final GivenCourseRepository givenCourseRepository;
+    private final CourseService courseService;
+    private final AcademicianService academicianService;
     @Override
     public List<GivenCourse> listAllGivenCourses(){
         return givenCourseRepository.findAll();

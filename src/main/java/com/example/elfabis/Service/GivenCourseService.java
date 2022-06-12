@@ -1,6 +1,7 @@
 package com.example.elfabis.Service;
 
 import com.example.elfabis.Entity.GivenCourse;
+import com.example.elfabis.Payload.Request.GivenCourseRequest;
 
 import java.util.List;
 

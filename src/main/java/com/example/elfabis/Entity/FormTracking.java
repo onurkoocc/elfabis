@@ -16,6 +16,9 @@ public class FormTracking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @OneToOne
+    @JoinColumn(name = "given_course_id")
+    private GivenCourse givenCourse;
     @ManyToMany(targetEntity = Academician.class, fetch = FetchType.LAZY)
     @JoinTable(
             name = "commission",

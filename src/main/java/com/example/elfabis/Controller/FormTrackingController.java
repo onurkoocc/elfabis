@@ -27,12 +27,12 @@ public class FormTrackingController {
     @GetMapping
     public List<FormTracking> listAllUsers() { return formTrackingService.listAllFormTrackings(); }
 
-    @PostMapping("/addformTracking")
+    @PostMapping
     public ResponseEntity createFormTracking(@RequestBody FormTracking formTracking){
         return ResponseEntity.ok(formTrackingService.createFormTracking(formTracking));
     }
 
-    @PutMapping("/updateformTracking")
+    @PutMapping
     public ResponseEntity updateFormTracking(@RequestBody FormTracking formTracking){
         return ResponseEntity.ok(formTrackingService.updateFormTracking(formTracking));
     }

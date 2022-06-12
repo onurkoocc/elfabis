@@ -3,6 +3,7 @@ package com.example.elfabis.Controller;
 import com.example.elfabis.Entity.Course;
 import com.example.elfabis.Entity.FormTracking;
 import com.example.elfabis.Entity.GivenCourse;
+import com.example.elfabis.Payload.Request.GivenCourseRequest;
 import com.example.elfabis.Repository.CourseRepository;
 import com.example.elfabis.Repository.FormTrackingRepository;
 import com.example.elfabis.Repository.GivenCourseRepository;
@@ -32,11 +33,20 @@ public class GivenCourseController {
 
     @PostMapping
     public ResponseEntity createGivenCourse(@RequestBody GivenCourse givenCourse){
+        if(givenCourse.getId()!=null){
+            return ResponseEntity.ok("Creating given course is not possible because request has id");
+        }
         return ResponseEntity.ok(givenCourseService.createGivenCourse(givenCourse));
     }
 
     @PutMapping
     public ResponseEntity updateGivenCourse(@RequestBody GivenCourse givenCourse){
+        if(givenCourse.getId()==null){
+            return ResponseEntity.ok("Updating given course is not possible because request doesn't have id");
+        }
+        if(givenCourseService.getGivenCourseById(givenCourse.getId())==null){
+            return ResponseEntity.ok("Updating given course is not possible because there is no GivenCourse with given id");
+        }
         return ResponseEntity.ok(givenCourseService.updateGivenCourse(givenCourse));
     }
     @GetMapping("/{id}")
