@@ -1,12 +1,14 @@
 package com.example.elfabis.Security;
 
 
+import com.example.elfabis.Entity.ERole;
 import com.example.elfabis.Security.Jwt.AuthEntryPointJwt;
 import com.example.elfabis.Security.Jwt.AuthTokenFilter;
 import com.example.elfabis.Security.Service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,12 +19,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true)
+        prePostEnabled = true,
+        securedEnabled = true)
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -54,18 +58,16 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        String[] endPoints = new String[]{"/plans","/academicians","/courses","/equivalentCourses","/formtrackings","/givenCourses","/roles"};
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
                 .antMatchers("/test/**").permitAll()
-                .antMatchers("/academicians/**").permitAll()
-                .antMatchers("/courses/**").permitAll()
-                .antMatchers("/equivalentCourses/**").permitAll()
-                .antMatchers("/formtrackings/**").permitAll()
-                .antMatchers("/givenCourses/**").permitAll()
-                .antMatchers("/plans/**").permitAll()
-                .antMatchers("/roles/**").permitAll()
+                .regexMatchers(HttpMethod.GET).permitAll()
+                .regexMatchers(HttpMethod.POST,endPoints).hasAuthority("MUDEKMEMBER")
+                .regexMatchers(HttpMethod.PUT,endPoints).hasAuthority("MUDEKMEMBER")
+                .regexMatchers(HttpMethod.DELETE,endPoints).hasAuthority("MUDEKMEMBER")
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
