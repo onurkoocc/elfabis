@@ -1,9 +1,6 @@
 package com.example.elfabis.Service.ServiceImp;
 
 import com.example.elfabis.Entity.GivenCourse;
-import com.example.elfabis.Payload.Request.GivenCourseRequest;
-import com.example.elfabis.Repository.AcademicianRepository;
-import com.example.elfabis.Repository.CourseRepository;
 import com.example.elfabis.Repository.GivenCourseRepository;
 import com.example.elfabis.Service.AcademicianService;
 import com.example.elfabis.Service.CourseService;
@@ -21,24 +18,29 @@ public class GivenCourseServiceImp implements GivenCourseService {
     private final GivenCourseRepository givenCourseRepository;
     private final CourseService courseService;
     private final AcademicianService academicianService;
+
     @Override
-    public List<GivenCourse> listAllGivenCourses(){
+    public List<GivenCourse> listAllGivenCourses() {
         return givenCourseRepository.findAll();
     }
+
     @Override
-    public GivenCourse createGivenCourse(GivenCourse givenCourse){
+    public GivenCourse createGivenCourse(GivenCourse givenCourse) {
         return givenCourseRepository.save(givenCourse);
     }
+
     @Override
-    public void deleteGivenCourse(Integer givenCourseId){
+    public void deleteGivenCourse(Integer givenCourseId) {
         givenCourseRepository.deleteById(givenCourseId);
     }
+
     @Override
-    public GivenCourse updateGivenCourse(GivenCourse givenCourse){
+    public GivenCourse updateGivenCourse(GivenCourse givenCourse) {
         return givenCourseRepository.save(givenCourse);
     }
+
     @Override
-    public GivenCourse getGivenCourseById(Integer givenCourseId){
+    public GivenCourse getGivenCourseById(Integer givenCourseId) {
         return givenCourseRepository.getById(givenCourseId);
     }
 }

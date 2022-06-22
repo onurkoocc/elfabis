@@ -1,6 +1,5 @@
 package com.example.elfabis.Service;
 
-import com.example.elfabis.Entity.EquivalentCourse;
 import com.example.elfabis.Entity.Plan;
 
 import java.util.List;

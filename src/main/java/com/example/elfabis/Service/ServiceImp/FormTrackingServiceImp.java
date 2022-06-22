@@ -14,24 +14,29 @@ import java.util.List;
 @AllArgsConstructor
 public class FormTrackingServiceImp implements FormTrackingService {
     FormTrackingRepository formTrackingRepository;
+
     @Override
-    public List<FormTracking> listAllFormTrackings(){
+    public List<FormTracking> listAllFormTrackings() {
         return formTrackingRepository.findAll();
     }
+
     @Override
-    public FormTracking getFormTrackingById(Integer formTrackingId){
+    public FormTracking getFormTrackingById(Integer formTrackingId) {
         return formTrackingRepository.getById(formTrackingId);
     }
+
     @Override
-    public FormTracking updateFormTracking(FormTracking formTracking){
+    public FormTracking updateFormTracking(FormTracking formTracking) {
         return formTrackingRepository.save(formTracking);
     }
+
     @Override
-    public void deleteFormTracking(Integer formTrackingId){
+    public void deleteFormTracking(Integer formTrackingId) {
         formTrackingRepository.deleteById(formTrackingId);
     }
+
     @Override
-    public FormTracking createFormTracking(FormTracking formTracking){
+    public FormTracking createFormTracking(FormTracking formTracking) {
         return formTrackingRepository.save(formTracking);
     }
 }

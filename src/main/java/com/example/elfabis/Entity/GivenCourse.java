@@ -1,6 +1,8 @@
 package com.example.elfabis.Entity;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -8,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "given_course")
 @Getter
 @Setter
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 public class GivenCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +19,7 @@ public class GivenCourse {
     @JoinColumn(name = "course_id")
     private Course course;
     @ManyToOne
-    @JoinColumn(name="lecturer_id")
+    @JoinColumn(name = "lecturer_id")
     private Academician lecturer;
     private int year;
     private int semester;

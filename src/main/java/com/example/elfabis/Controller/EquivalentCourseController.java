@@ -1,6 +1,5 @@
 package com.example.elfabis.Controller;
 
-import com.example.elfabis.Entity.Course;
 import com.example.elfabis.Entity.EquivalentCourse;
 import com.example.elfabis.Service.EquivalentCourseService;
 import lombok.AllArgsConstructor;

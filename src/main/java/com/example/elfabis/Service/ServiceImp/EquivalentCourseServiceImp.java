@@ -1,8 +1,6 @@
 package com.example.elfabis.Service.ServiceImp;
 
-import com.example.elfabis.Entity.Course;
 import com.example.elfabis.Entity.EquivalentCourse;
-import com.example.elfabis.Repository.CourseRepository;
 import com.example.elfabis.Repository.EquivalentCourseRepository;
 import com.example.elfabis.Service.EquivalentCourseService;
 import lombok.AllArgsConstructor;

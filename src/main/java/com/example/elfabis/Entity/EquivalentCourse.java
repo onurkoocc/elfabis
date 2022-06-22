@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "equivalent_course")
 @Getter
 @Setter
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 public class EquivalentCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,23 +16,27 @@ public class CourseServiceImp implements CourseService {
     CourseRepository courseRepository;
 
     @Override
-    public List<Course> listAllCourses(){
+    public List<Course> listAllCourses() {
         return courseRepository.findAll();
     }
+
     @Override
-    public Course getCourseById(Integer courseId){
+    public Course getCourseById(Integer courseId) {
         return courseRepository.getById(courseId);
     }
+
     @Override
-    public Course updateCourse(Course course){
+    public Course updateCourse(Course course) {
         return courseRepository.save(course);
     }
+
     @Override
-    public void deleteCourse(Integer courseId){
+    public void deleteCourse(Integer courseId) {
         courseRepository.deleteById(courseId);
     }
+
     @Override
-    public Course createCourse(Course course){
+    public Course createCourse(Course course) {
         return courseRepository.save(course);
     }
 }

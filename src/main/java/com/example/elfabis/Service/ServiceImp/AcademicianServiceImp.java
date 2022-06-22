@@ -9,11 +9,11 @@ import com.example.elfabis.Repository.RoleRepository;
 import com.example.elfabis.Service.AcademicianService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,17 +30,29 @@ public class AcademicianServiceImp implements AcademicianService {
     PasswordEncoder encoder;
 
     @Override
-    public List<Academician> listAllAcademicians(){
+    public List<Academician> listAllAcademicians() {
         return academicianRepository.findAll();
     }
 
     @Override
-    public Academician getAcademicianById(Integer id){
+    public List<Academician> listAllCommissioners() {
+        List<Academician> commissioners = new ArrayList<>();
+        List<Academician> allAcademicians = academicianRepository.findAll();
+        for (Academician academician : allAcademicians) {
+            if (academician.getRole().getName().equals(ERole.COMMISSIONER)) {
+                commissioners.add(academician);
+            }
+        }
+        return commissioners;
+    }
+
+    @Override
+    public Academician getAcademicianById(Integer id) {
         return academicianRepository.getById(id);
     }
 
     @Override
-    public Academician createAcademician(UserInfoRequest academician){
+    public Academician createAcademician(UserInfoRequest academician) {
         Academician userTmp = new Academician(academician.getName(),
                 academician.getEmail(),
                 academician.getUsername(),
@@ -52,15 +64,15 @@ public class AcademicianServiceImp implements AcademicianService {
         userTmp.setAbd(academician.getAbd());
         userTmp.setTitle(academician.getTitle());
 
-        if(strRole.equalsIgnoreCase("MUDEKMEMBER")){
+        if (strRole.equalsIgnoreCase("MUDEKMEMBER")) {
             Role adminRole = roleRepository.findByName(ERole.MUDEKMEMBER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             role.setRole(adminRole);
-        }else if (strRole.equalsIgnoreCase("COMMISSIONER")){
+        } else if (strRole.equalsIgnoreCase("COMMISSIONER")) {
             Role userRole = roleRepository.findByName(ERole.COMMISSIONER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             role.setRole(userRole);
-        }else{
+        } else {
             Role userRole = roleRepository.findByName(ERole.LECTURER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             role.setRole(userRole);
@@ -70,12 +82,14 @@ public class AcademicianServiceImp implements AcademicianService {
         userTmp = academicianRepository.save(userTmp);
         return userTmp;
     }
+
     @Override
-    public void deleteAcademician(Integer academicianId){
+    public void deleteAcademician(Integer academicianId) {
         academicianRepository.deleteById(academicianId);
     }
+
     @Override
-    public Academician updateAcademician(UserInfoRequest academician){
+    public Academician updateAcademician(UserInfoRequest academician) {
         Academician userTmp = academicianRepository.getById(academician.getId());
         userTmp.setName(academician.getName());
         userTmp.setUsername(academician.getUsername());
@@ -88,15 +102,15 @@ public class AcademicianServiceImp implements AcademicianService {
         String strRole = academician.getRole();
         Role role = new Role();
 
-        if(strRole.equalsIgnoreCase("MUDEKMEMBER")){
+        if (strRole.equalsIgnoreCase("MUDEKMEMBER")) {
             Role adminRole = roleRepository.findByName(ERole.MUDEKMEMBER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             role.setRole(adminRole);
-        }else if (strRole.equalsIgnoreCase("COMMISSIONER")){
+        } else if (strRole.equalsIgnoreCase("COMMISSIONER")) {
             Role userRole = roleRepository.findByName(ERole.COMMISSIONER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             role.setRole(userRole);
-        }else{
+        } else {
             Role userRole = roleRepository.findByName(ERole.LECTURER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             role.setRole(userRole);

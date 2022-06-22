@@ -1,6 +1,8 @@
 package com.example.elfabis.Payload.Request;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class SignupRequest {
     @NotBlank
@@ -12,7 +14,7 @@ public class SignupRequest {
     @Email
     private String email;
 
-    private String role ="";
+    private String role = "";
 
     @NotBlank
     @Size(min = 6, max = 40)

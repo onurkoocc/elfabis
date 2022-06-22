@@ -1,9 +1,11 @@
 package com.example.elfabis.Payload.Request;
+
 import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 @Data
 public class UserInfoRequest {
     private int id;
@@ -21,7 +23,7 @@ public class UserInfoRequest {
     @Email
     private String email;
 
-    private String role ="";
+    private String role = "";
 
     @NotBlank
     @Size(min = 6, max = 40)

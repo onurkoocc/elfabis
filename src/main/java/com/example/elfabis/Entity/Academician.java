@@ -1,9 +1,9 @@
 package com.example.elfabis.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 
 @Entity
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 @Table(name = "academician",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
@@ -49,7 +49,7 @@ public class Academician {
     public Academician() {
     }
 
-    public Academician(String username,String email,  String password) {
+    public Academician(String username, String email, String password) {
         this.email = email;
         this.username = username;
         this.password = password;
