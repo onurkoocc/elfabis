@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,5 +39,19 @@ public class FormTrackingServiceImp implements FormTrackingService {
     @Override
     public FormTracking createFormTracking(FormTracking formTracking) {
         return formTrackingRepository.save(formTracking);
+    }
+
+    @Override
+    public List<FormTracking> getAllCompleted() {
+        List<FormTracking> formTrackings = formTrackingRepository.findAll();
+        List<FormTracking> completedFormTrackings = new ArrayList<>();
+        for (FormTracking f : formTrackings) {
+            if (f.isArea1() && f.isArea2() && f.isArea3() && f.isArea4() &&
+            f.isArea5() &&  f.isArea11()  &&
+            f.isArea13() && f.isForm2() && f.isForm3() && f.isPc()){
+                completedFormTrackings.add(f);
+            }
+        }
+        return completedFormTrackings;
     }
 }

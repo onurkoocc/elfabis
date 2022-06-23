@@ -14,4 +14,6 @@ public interface FormTrackingService {
     void deleteFormTracking(Integer formTrackingId);
 
     FormTracking createFormTracking(FormTracking formTracking);
+
+    List<FormTracking> getAllCompleted();
 }

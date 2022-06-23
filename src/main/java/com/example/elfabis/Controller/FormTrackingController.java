@@ -46,4 +46,9 @@ public class FormTrackingController {
         formTrackingService.deleteFormTracking(id);
         return ResponseEntity.ok("ok");
     }
+
+    @GetMapping("/getallcompleted")
+    public ResponseEntity getAllCompletedFormTrackings(){
+        return ResponseEntity.ok(formTrackingService.getAllCompleted());
+    }
 }

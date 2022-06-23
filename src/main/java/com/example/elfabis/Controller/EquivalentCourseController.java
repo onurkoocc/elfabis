@@ -1,6 +1,7 @@
 package com.example.elfabis.Controller;
 
 import com.example.elfabis.Entity.EquivalentCourse;
+import com.example.elfabis.Service.CourseService;
 import com.example.elfabis.Service.EquivalentCourseService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import java.util.List;
 public class EquivalentCourseController {
     @Autowired
     EquivalentCourseService equivalentCourseService;
+
+    @Autowired
+    CourseService courseService;
 
     @GetMapping
     public List<EquivalentCourse> listAllUsers() {
@@ -41,5 +45,14 @@ public class EquivalentCourseController {
     public ResponseEntity deleteById(@PathVariable("id") Integer id) {
         equivalentCourseService.deleteEquivalentCourse(id);
         return ResponseEntity.ok("ok");
+    }
+
+    @GetMapping("/{id}/getallcoursesbyequivalentcourse")
+    public ResponseEntity getAllCoursesByEquivalentCourse(@PathVariable("id") Integer id) {
+        EquivalentCourse equivalentCourse = equivalentCourseService.getEquivalentCourseById(id);
+        if (equivalentCourse == null) {
+            return ResponseEntity.badRequest().body("There is not any equivalent course for this id");
+        }
+        return ResponseEntity.ok(courseService.getAllCoursesByEquivalentCourse(equivalentCourse));
     }
 }

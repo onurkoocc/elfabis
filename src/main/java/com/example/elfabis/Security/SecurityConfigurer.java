@@ -58,16 +58,20 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] endPoints = new String[]{"/plans","/academicians","/courses","/equivalentCourses","/formtrackings","/givenCourses","/roles"};
+        String[] endPoints = new String[]{"/plans", "/academicians", "/courses", "/equivalentCourses", "/givenCourses", "/roles"};
+        String[] formTrackingEndPoints = new String[]{"/formtrackings", "/formtrackings/**"};
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .regexMatchers(HttpMethod.GET).permitAll()
-                .regexMatchers(HttpMethod.POST,endPoints).hasAuthority("MUDEKMEMBER")
-                .regexMatchers(HttpMethod.PUT,endPoints).hasAuthority("MUDEKMEMBER")
-                .regexMatchers(HttpMethod.DELETE,endPoints).hasAuthority("MUDEKMEMBER")
+                .regexMatchers(HttpMethod.POST, endPoints).hasAuthority("MUDEKMEMBER")
+                .regexMatchers(HttpMethod.PUT, endPoints).hasAuthority("MUDEKMEMBER")
+                .regexMatchers(HttpMethod.DELETE, endPoints).hasAuthority("MUDEKMEMBER")
+                .antMatchers(HttpMethod.POST, formTrackingEndPoints).hasAuthority("MUDEKMEMBER")
+                .antMatchers(HttpMethod.PUT, formTrackingEndPoints).hasAnyAuthority("MUDEKMEMBER","COMMISSIONER","LECTURER")
+                .antMatchers(HttpMethod.DELETE, formTrackingEndPoints).hasAuthority("MUDEKMEMBER")
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

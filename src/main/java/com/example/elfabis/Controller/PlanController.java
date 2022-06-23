@@ -1,6 +1,7 @@
 package com.example.elfabis.Controller;
 
 import com.example.elfabis.Entity.Plan;
+import com.example.elfabis.Service.CourseService;
 import com.example.elfabis.Service.PlanService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import java.util.List;
 public class PlanController {
     @Autowired
     PlanService planService;
+
+    @Autowired
+    CourseService courseService;
 
     @GetMapping
     public List<Plan> listAllUsers() {
@@ -41,5 +45,14 @@ public class PlanController {
     public ResponseEntity deleteById(@PathVariable("id") Integer id) {
         planService.deletePlan(id);
         return ResponseEntity.ok("ok");
+    }
+
+    @GetMapping("/{id}/getallcoursesbyplan")
+    public ResponseEntity getAllCoursesByPlan(@PathVariable("id") Integer id) {
+        Plan plan = planService.getPlanById(id);
+        if (plan == null) {
+            return ResponseEntity.badRequest().body("There is not any plan for this id");
+        }
+        return ResponseEntity.ok(courseService.getAllByPlan(plan));
     }
 }
