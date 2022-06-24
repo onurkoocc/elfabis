@@ -5,6 +5,7 @@ import com.example.elfabis.Repository.CourseRepository;
 import com.example.elfabis.Service.CourseService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/courses")
 @AllArgsConstructor
+@EnableAutoConfiguration
 public class CourseController {
     @Autowired
     CourseRepository courseRepository;

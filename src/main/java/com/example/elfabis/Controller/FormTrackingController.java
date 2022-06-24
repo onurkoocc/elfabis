@@ -5,6 +5,7 @@ import com.example.elfabis.Repository.FormTrackingRepository;
 import com.example.elfabis.Service.FormTrackingService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/formtrackings")
 @AllArgsConstructor
+@EnableAutoConfiguration
 public class FormTrackingController {
     @Autowired
     FormTrackingRepository formTrackingRepository;

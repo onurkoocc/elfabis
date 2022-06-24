@@ -5,6 +5,7 @@ import com.example.elfabis.Service.CourseService;
 import com.example.elfabis.Service.EquivalentCourseService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/equivalentCourses")
 @AllArgsConstructor
+@EnableAutoConfiguration
 public class EquivalentCourseController {
     @Autowired
     EquivalentCourseService equivalentCourseService;
